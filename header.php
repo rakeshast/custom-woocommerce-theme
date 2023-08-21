@@ -12,7 +12,19 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">Start Bootstrap</a>
+            <a class="navbar-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                <?php 
+                    if (has_custom_logo()) {
+                        // the_custom_logo();
+                        $image = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+                        $alt = get_bloginfo('title');
+                        echo "<img src='".$image[0]."' alt='".$alt."' width='70'>";
+                    }else{
+                        echo bloginfo('title');
+                    }
+                    
+                ?>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <?php 
@@ -23,7 +35,7 @@
                     ));
                 ?>
                 <?php if (class_exists('WooCommerce')) : ?>
-                    <a href="<?php echo wc_get_cart_url(); ?>" class="btn btn-primary" style="margin-right:10px;">
+                    <a href="<?php echo wc_get_cart_url(); ?>" class="btn btn-primary cart-count-menu-item" style="margin-right:10px;">
                     Cart (<span class="items-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>)
                     </a>
                     <?php if (is_user_logged_in()) : ?>

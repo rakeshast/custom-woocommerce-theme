@@ -207,3 +207,84 @@ function add_cart_dropdown_to_menu($items, $args) {
 // add_filter('wp_nav_menu_items', 'add_cart_dropdown_to_menu', 10, 2);
 
 
+// Update cart count on header menu when removing a product from the cart
+// Enqueue JavaScript for cart count update on cart page
+// function enqueue_cart_count_update_script() {
+//     if (is_cart()) {
+//         wp_enqueue_script('cart-count-update', get_template_directory_uri() . '/assets/js/cart-count-update.js', array('jquery'), time(), true);
+//         wp_localize_script('cart-count-update', 'cartCountAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+//     }
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_cart_count_update_script');
+
+
+
+// // Remove item from cart
+// function custom_remove_cart_item($cart_item_key) {
+//     WC()->cart->remove_cart_item($cart_item_key);
+//     $cart_count = WC()->cart->get_cart_contents_count();
+//     print_r($cart_count);
+//     wp_send_json_success(array('message' => 'Item removed from cart.', 'count' => $cart_count ));
+// }
+// add_action('wp_ajax_custom_remove_cart_item', 'custom_remove_cart_item');
+// add_action('wp_ajax_nopriv_custom_remove_cart_item', 'custom_remove_cart_item');
+
+// Update item count in cart
+// function custom_update_cart_item_count() {
+//     $cart_count = WC()->cart->get_cart_contents_count();
+//     wp_send_json_success(array('count' => $cart_count));
+// }
+// add_action('wp_ajax_custom_update_cart_item_count', 'custom_update_cart_item_count');
+// add_action('wp_ajax_nopriv_custom_update_cart_item_count', 'custom_update_cart_item_count');
+
+
+
+// Add Extra Tabs Woocommerce
+
+// Add custom tabs to WooCommerce product pages
+function custom_product_tabs($tabs) {
+    // Add your custom tabs here
+    $tabs['custom_tab_1'] = array(
+        'title'     => __('Custom Tab 1', 'woocommerce'),
+        'priority'  => 50,
+        'callback'  => 'custom_tab_1_content',
+    );
+
+    $tabs['custom_tab_2'] = array(
+        'title'     => __('Custom Tab 2', 'woocommerce'),
+        'priority'  => 60,
+        'callback'  => 'custom_tab_2_content',
+    );
+    $tabs['custom_tab_3'] = array(
+        'title'     => __('Custom Tab 3', 'woocommerce'),
+        'priority'  => 80,
+        'callback'  => 'custom_tab_3_content',
+    );
+
+    // Add more custom tabs if needed
+    
+    return $tabs;
+}
+add_filter('woocommerce_product_tabs', 'custom_product_tabs');
+
+// Callback functions for custom tab content
+function custom_tab_1_content() {
+    echo '<div id="custom_tab_content">';
+    echo '<h2>Custom Tab 1 Content</h2>';
+    echo '<p>This is the content for Custom Tab 1.</p>';
+    echo '</div>';
+}
+
+function custom_tab_2_content() {
+    echo '<div id="custom_tab_content">';
+    echo '<h2>Custom Tab 2 Content</h2>';
+    echo '<p>This is the content for Custom Tab 2.</p>';
+    echo '</div>';
+}
+function custom_tab_3_content() {
+    echo '<div id="custom_tab_content">';
+    echo '<h2>Custom Tab 3 Content</h2>';
+    echo '<p>This is the content for Custom Tab 3.</p>';
+    echo '</div>';
+}
+
