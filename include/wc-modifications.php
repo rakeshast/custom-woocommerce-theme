@@ -95,15 +95,15 @@ function add_custom_field(){
 add_action('woocommerce_single_product_summary', 'add_custom_field', 6);
 
 
-if (isset($_POST['billing_phone'])) {
-    $new_phone_number = sanitize_text_field($_POST['billing_phone']);
-    $user_id = get_current_user_id(); // Get the current user ID
+// if (isset($_POST['billing_phone'])) {
+//     $new_phone_number = sanitize_text_field($_POST['billing_phone']);
+//     $user_id = get_current_user_id(); // Get the current user ID
 
-    // Update the user meta value
-    update_user_meta($user_id, 'billing_phone', $new_phone_number);
+//     // Update the user meta value
+//     update_user_meta($user_id, 'billing_phone', $new_phone_number);
     
-    echo "Phone number updated successfully!";
-}
+//     //echo "Phone number updated successfully!";
+// }
 
 
 // function wpdocs_my_search_form( $form ) {

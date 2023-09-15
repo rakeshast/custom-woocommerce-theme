@@ -1,5 +1,14 @@
 <?php get_header(); ?>
 
+<?php
+// Your PHP code above
+
+// Display the shortcode
+// echo do_shortcode('[custom_shortcode]');
+
+// Your PHP code below
+?>
+
     <!-- Page content-->
     <div class="container mt-5">
         <div class="row">
@@ -8,7 +17,9 @@
                     if (have_posts()) {
                         while (have_posts()) {
                             the_post(); 
-                        $url = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID(), 'thubmnail'));    
+                        // $url = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID(), 'thubmnail')); 
+                        
+                        the_post_thumbnail('thumbnail'); 
                     ?>
                             
                             <article>

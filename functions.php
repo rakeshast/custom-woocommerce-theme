@@ -74,7 +74,6 @@ add_filter('nav_menu_link_attributes', 'simple_add_anchor_menu_class', 1, 3);
 
 if (class_exists("WooCommerce")) { 
     require_once get_template_directory() . '/include/wc-modifications.php';
-    require_once get_template_directory() . '/include/pdf-order-generator.php';
 }
 require_once get_template_directory() . '/include/theme-customization.php';
 
@@ -94,3 +93,30 @@ function enqueue_cart_count_update_script() {
 
 }
 add_action('wp_enqueue_scripts', 'enqueue_cart_count_update_script');
+
+
+add_action( 'wc_invoice_order_invoice_dpf_add_extra_order_details', 'callback_function', 10, 1 );
+function callback_function($order){
+    $html = '';
+    $data = $order->get_payment_method();
+    echo $html .= '<tr><th style="text-align:left;">' . esc_html__( 'Payment Method short', 'wc-invoice' ) . '</th><td style="text-align:right;">' .$data. '</th></tr>';
+    
+}   
+
+
+
+
+
+// add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 5 );
+
+// function my_post_image_html( $html, $post_id, $post_thumbnail_id, $size, $attr ) {
+
+//   $upload_dir = wp_upload_dir();
+//   $base_url = $upload_dir['baseurl'];
+
+//   // Change the default upload directory to AWS Bucket link
+//   $AWSBucket = 'https://ecd-blog-bucket.s3.amazonaws.com/wp-content/uploads';
+//   echo $html = str_replace($base_url, $AWSBucket, $html);
+
+//   return $html;
+// }
